@@ -1,0 +1,57 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - uses: gradle/actions/setup-gradle@v4
+
+      - name: Static analysis
+        run: ./gradlew detekt
+
+      - name: Unit tests (also checks that docs/sample-report is up to date)
+        run: ./gradlew test
+
+      - name: Trace this tool's own requirements (fails on any gap)
+        run: |
+          ./gradlew traceSelf
+          cat build/trace-self/gaps.md >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Build the CLI
+        run: ./gradlew installDist distZip
+
+      - name: Run the CLI on the sample project
+        run: |
+          build/install/aspice-trace/bin/aspice-trace samples/hmi-demo \
+            --out build/sample-report \
+            --link-base "https://github.com/${{ github.repository }}/blob/${{ github.sha }}/samples/hmi-demo/"
+          cat build/sample-report/gaps.md >> "$GITHUB_STEP_SUMMARY"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: traceability-reports
+          path: |
+            build/trace-self/
+            build/sample-report/
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: aspice-trace-cli
+          path: build/distributions/*.zip

@@ -1,0 +1,14 @@
+# Builds on detekt's default rules; only project-specific overrides live here.
+naming:
+  TopLevelPropertyNaming:
+    constantPattern: '[A-Z][A-Za-z0-9_]*'
+
+style:
+  MagicNumber:
+    ignorePropertyDeclaration: true
+    ignoreCompanionObjectPropertyDeclaration: true
+    excludes: ['**/test/**']
+
+complexity:
+  LongParameterList:
+    ignoreDefaultParameters: true

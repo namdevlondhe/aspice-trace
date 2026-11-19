@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Traceability: hmi-demo</title>
+<style>
+:root{--bg:#f7f8fa;--surface:#fff;--text:#1b1f24;--muted:#5b6470;--border:#d9dde3;--accent:#2457c5;
+--ok-bg:#e3f4e8;--ok:#1d6b35;--warn-bg:#fdf1d8;--warn:#7a5200;--bad-bg:#fbe4e4;--bad:#a12626}
+@media (prefers-color-scheme:dark){:root{--bg:#111418;--surface:#1a1e24;--text:#e6e9ee;--muted:#9aa3ae;
+--border:#2c323b;--accent:#7ea6ff;--ok-bg:#163a22;--ok:#8fdba6;--warn-bg:#3d2f0e;--warn:#f0c66b;
+--bad-bg:#431c1c;--bad:#f4a3a3}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:15px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:1200px;margin:0 auto;padding:24px 16px 48px}
+.eyebrow{margin:0;color:var(--muted);font-size:13px;text-transform:uppercase;letter-spacing:.08em}
+h1{margin:4px 0 20px;font-size:26px}
+h2{font-size:18px;margin:32px 0 8px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px 16px;display:flex;
+flex-direction:column}
+.card .label{color:var(--muted);font-size:13px}
+.card .value{font-size:28px;font-weight:650;font-variant-numeric:tabular-nums}
+.card .detail{color:var(--muted);font-size:13px}
+.card.alert .value{color:var(--bad)}
+.controls{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:10px}
+input,select{font:inherit;color:var(--text);background:var(--surface);border:1px solid var(--border);
+border-radius:8px;padding:7px 10px}
+input{flex:1 1 220px}
+#count{color:var(--muted);font-size:13px}
+.scroll{overflow-x:auto;background:var(--surface);border:1px solid var(--border);border-radius:10px}
+table{border-collapse:collapse;width:100%;min-width:760px}
+th,td{text-align:left;vertical-align:top;padding:9px 12px;border-bottom:1px solid var(--border)}
+th{font-size:13px;color:var(--muted);font-weight:600;white-space:nowrap}
+tbody tr:last-child td{border-bottom:0}
+td.id{font-weight:600;white-space:nowrap}
+td.title{min-width:220px}
+code{font:13px ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.none{color:var(--muted);font-style:italic}
+.badge{display:inline-block;border-radius:999px;padding:2px 10px;font-size:12px;font-weight:600;white-space:nowrap}
+.covered{background:var(--ok-bg);color:var(--ok)}
+.not-verified,.not-implemented{background:var(--warn-bg);color:var(--warn)}
+.untraced{background:var(--bad-bg);color:var(--bad)}
+.pill{font-size:13px;color:var(--muted);font-weight:500}
+.note{color:var(--muted);margin:0 0 10px}
+footer{margin-top:32px;color:var(--muted);font-size:13px}
+</style>
+</head><body><main>
+<header><p class="eyebrow">Traceability matrix</p><h1>hmi-demo</h1></header>
+<section class="cards">
+<div class="card"><span class="label">Requirements</span><span class="value">8</span><span class="detail">defined in specs</span></div>
+<div class="card"><span class="label">Implemented</span><span class="value">75%</span><span class="detail">6 of 8</span></div>
+<div class="card"><span class="label">Verified</span><span class="value">62%</span><span class="detail">5 of 8</span></div>
+<div class="card alert"><span class="label">Gaps</span><span class="value">5</span><span class="detail">to fix</span></div>
+</section>
+<section><h2>Matrix</h2>
+<div class="controls">
+<input id="q" type="search" placeholder="Filter by ID, title or file" 
+aria-label="Filter rows">
+<select id="status" aria-label="Filter by status"><option value="">All statuses</option>
+<option value="covered">Covered</option>
+<option value="not-verified">Not verified</option>
+<option value="not-implemented">Not implemented</option>
+<option value="untraced">Not implemented, not verified</option>
+</select><span id="count" aria-live="polite"></span></div>
+<div class="scroll"><table id="matrix"><thead><tr>
+<th>Requirement</th><th>Title</th>
+<th>Specification (SWE.1)</th>
+<th>Implementation (SWE.3)</th>
+<th>Verification (SWE.4–SWE.6)</th>
+<th>Status</th></tr></thead><tbody>
+<tr data-status="covered">
+<td class="id">SW-HMI-001</td>
+<td class="title">Show the set temperature for each zone</td>
+<td><a href="https://github.com/namdevlondhe/aspice-trace/blob/main/samples/hmi-demo/docs/requirements.md?plain=1#L9" title="docs/requirements.md:9"><code>requirements.md:9</code></a></td>
+<td><a href="https://github.com/namdevlondhe/aspice-trace/blob/main/samples/hmi-demo/src/main/kotlin/dev/namdev/sample/climate/ClimateScreen.kt#L4" title="src/main/kotlin/dev/namdev/sample/climate/ClimateScreen.kt:4"><code>ClimateScreen.kt:4</code></a></td>
+<td><a href="https://github.com/namdevlondhe/aspice-trace/blob/main/samples/hmi-demo/src/test/kotlin/dev/namdev/sample/climate/ClimateControllerTest.kt#L12" title="src/test/kotlin/dev/namdev/sample/climate/ClimateControllerTest.kt:12"><code>ClimateControllerTest.kt:12</code></a></td>
+<td><span class="badge covered">Covered</span></td></tr>
+<tr data-status="covered">
+<td class="id">SW-HMI-002</td>
+<td class="title">Temperature step and range</td>
+<td><a href="https://github.com/namdevlondhe/aspice-trace/blob/main/samples/hmi-demo/docs/requirements.md?plain=1#L12" title="docs/requirements.md:12"><code>requirements.md:12</code></a></td>
+<td><a href="https://github.com/namdevlondhe/aspice-trace/blob/main/samples/hmi-demo/src/main/kotlin/dev/namdev/sample/climate/ClimateController.kt#L20" title="src/main/kotlin/dev/namdev/sample/climate/ClimateController.kt:20"><code>ClimateController.kt:20</code></a></td>
+<td><a href="https://github.com/namdevlondhe/aspice-trace/blob/main/samples/hmi-demo/src/test/kotlin/dev/namdev/sample/climate/ClimateControllerTest.kt#L12" title="src/test/kotlin/dev/namdev/sample/climate/ClimateControllerTest.kt:12"><code>ClimateControllerTest.kt:12</code></a></td>
+<td><span class="badge covered">Covered</span></td></tr>
+<tr data-status="covered">
+<td class="id">SW-HMI-003</td>
+<td class="title">Fan speed levels</td>
+<td><a href="https://github.com/namdevlondhe/aspice-trace/blob/main/samples/hmi-demo/docs/requirements.md?plain=1#L18" title="docs/requirements.md:18"><code>requirements.md:18</code></a></td>
+<td><a href="https://github.com/namdevlondhe/aspice-trace/blob/main/samples/hmi-demo/src/main/kotlin/dev/namdev/sample/climate/ClimateController.kt#L26" title="src/main/kotlin/dev/namdev/sample/climate/ClimateController.kt:26"><code>ClimateController.kt:26</code></a><br><a href="https://github.com/namdevlondhe/aspice-trace/blob/main/samples/hmi-demo/src/vhal/fan_control.c#L7" title="src/vhal/fan_control.c:7"><code>fan_control.c:7</code></a></td>
+<td><a href="https://github.com/namdevlondhe/aspice-trace/blob/main/samples/hmi-demo/src/test/kotlin/dev/namdev/sample/climate/ClimateControllerTest.kt#L21" title="src/test/kotlin/dev/namdev/sample/climate/ClimateControllerTest.kt:21"><code>ClimateControllerTest.kt:21</code></a></td>
+<td><span class="badge covered">Covered</span></td></tr>
+<tr data-status="covered">
+<td class="id">SW-HMI-004</td>
+<td class="title">Defrost overrides cabin settings</td>
+<td><a href="https://github.com/namdevlondhe/aspice-trace/blob/main/samples/hmi-demo/docs/requirements.md?plain=1#L21" title="docs/requirements.md:21"><code>requirements.md:21</code></a></td>
+<td><a href="https://github.com/namdevlondhe/aspice-trace/blob/main/samples/hmi-demo/src/main/kotlin/dev/namdev/sample/climate/ClimateController.kt#L31" title="src/main/kotlin/dev/namdev/sample/climate/ClimateController.kt:31"><code>ClimateController.kt:31</code></a></td>
+<td><a href="https://github.com/namdevlondhe/aspice-trace/blob/main/samples/hmi-demo/src/test/kotlin/dev/namdev/sample/climate/ClimateControllerTest.kt#L28" title="src/test/kotlin/dev/namdev/sample/climate/ClimateControllerTest.kt:28"><code>ClimateControllerTest.kt:28</code></a></td>
+<td><span class="badge covered">Covered</span></td></tr>
+<tr data-status="not-implemented">
+<td class="id">SW-HMI-005</td>
+<td class="title">Restore settings after defrost</td>
+<td><a href="https://github.com/namdevlondhe/aspice-trace/blob/main/samples/hmi-demo/docs/requirements.md?plain=1#L24" title="docs/requirements.md:24"><code>requirements.md:24</code></a></td>
+<td><span class="none">none</span></td>
+<td><a href="https://github.com/namdevlondhe/aspice-trace/blob/main/samples/hmi-demo/src/test/kotlin/dev/namdev/sample/climate/ClimateControllerTest.kt#L36" title="src/test/kotlin/dev/namdev/sample/climate/ClimateControllerTest.kt:36"><code>ClimateControllerTest.kt:36</code></a></td>
+<td><span class="badge not-implemented">Not implemented</span></td></tr>
+<tr data-status="not-verified">
+<td class="id">SW-HMI-006</td>
+<td class="title">Touch targets of at least 76 dp</td>
+<td><a href="https://github.com/namdevlondhe/aspice-trace/blob/main/samples/hmi-demo/docs/requirements.md?plain=1#L31" title="docs/requirements.md:31"><code>requirements.md:31</code></a></td>
+<td><a href="https://github.com/namdevlondhe/aspice-trace/blob/main/samples/hmi-demo/src/main/kotlin/dev/namdev/sample/climate/ClimateScreen.kt#L10" title="src/main/kotlin/dev/namdev/sample/climate/ClimateScreen.kt:10"><code>ClimateScreen.kt:10</code></a></td>
+<td><span class="none">none</span></td>
+<td><span class="badge not-verified">Not verified</span></td></tr>
+<tr data-status="not-verified">
+<td class="id">SW-HMI-007</td>
+<td class="title">Day and night theme follows the vehicle</td>
+<td><a href="https://github.com/namdevlondhe/aspice-trace/blob/main/samples/hmi-demo/docs/requirements.md?plain=1#L32" title="docs/requirements.md:32"><code>requirements.md:32</code></a></td>
+<td><a href="https://github.com/namdevlondhe/aspice-trace/blob/main/samples/hmi-demo/src/main/kotlin/dev/namdev/sample/climate/ClimateScreen.kt#L13" title="src/main/kotlin/dev/namdev/sample/climate/ClimateScreen.kt:13"><code>ClimateScreen.kt:13</code></a></td>
+<td><span class="none">none</span></td>
+<td><span class="badge not-verified">Not verified</span></td></tr>
+<tr data-status="untraced">
+<td class="id">SW-HMI-008</td>
+<td class="title">Block text entry while driving</td>
+<td><a href="https://github.com/namdevlondhe/aspice-trace/blob/main/samples/hmi-demo/docs/requirements.md?plain=1#L33" title="docs/requirements.md:33"><code>requirements.md:33</code></a></td>
+<td><span class="none">none</span></td>
+<td><span class="none">none</span></td>
+<td><span class="badge untraced">Not implemented, not verified</span></td></tr>
+</tbody></table></div></section>
+<section><h2>Unknown references <span class="pill">1</span></h2><p class="note">Cited by code or tests, but not defined in any spec (broken backward traceability).</p>
+<div class="scroll"><table><thead><tr><th>Requirement</th><th>Referenced at</th></tr></thead><tbody>
+<tr><td class="id">SW-HMI-099</td><td><a href="https://github.com/namdevlondhe/aspice-trace/blob/main/samples/hmi-demo/src/main/kotlin/dev/namdev/sample/climate/ClimateController.kt#L41" title="src/main/kotlin/dev/namdev/sample/climate/ClimateController.kt:41"><code>ClimateController.kt:41</code></a></td></tr>
+</tbody></table></div></section>
+<footer>Generated by aspice-trace 0.1.0 from 7 files.</footer>
+</main><script>
+(function(){
+  var q=document.getElementById('q'),s=document.getElementById('status'),c=document.getElementById('count');
+  var rows=Array.prototype.slice.call(document.querySelectorAll('#matrix tbody tr'));
+  function apply(){
+    var t=q.value.trim().toLowerCase(),n=0;
+    rows.forEach(function(r){
+      var show=(!s.value||r.getAttribute('data-status')===s.value)&&(!t||r.textContent.toLowerCase().indexOf(t)>=0);
+      r.hidden=!show;if(show){n++;}
+    });
+    c.textContent=n+' of '+rows.length+' requirements';
+  }
+  q.addEventListener('input',apply);s.addEventListener('change',apply);apply();
+})();
+</script></body></html>

@@ -1,0 +1,9 @@
+id,title,status,specification,implemented_by,verified_by
+SW-HMI-001,Show the set temperature for each zone,Covered,docs/requirements.md:9,src/main/kotlin/dev/namdev/sample/climate/ClimateScreen.kt:4,src/test/kotlin/dev/namdev/sample/climate/ClimateControllerTest.kt:12
+SW-HMI-002,Temperature step and range,Covered,docs/requirements.md:12,src/main/kotlin/dev/namdev/sample/climate/ClimateController.kt:20,src/test/kotlin/dev/namdev/sample/climate/ClimateControllerTest.kt:12
+SW-HMI-003,Fan speed levels,Covered,docs/requirements.md:18,src/main/kotlin/dev/namdev/sample/climate/ClimateController.kt:26; src/vhal/fan_control.c:7,src/test/kotlin/dev/namdev/sample/climate/ClimateControllerTest.kt:21
+SW-HMI-004,Defrost overrides cabin settings,Covered,docs/requirements.md:21,src/main/kotlin/dev/namdev/sample/climate/ClimateController.kt:31,src/test/kotlin/dev/namdev/sample/climate/ClimateControllerTest.kt:28
+SW-HMI-005,Restore settings after defrost,Not implemented,docs/requirements.md:24,,src/test/kotlin/dev/namdev/sample/climate/ClimateControllerTest.kt:36
+SW-HMI-006,Touch targets of at least 76 dp,Not verified,docs/requirements.md:31,src/main/kotlin/dev/namdev/sample/climate/ClimateScreen.kt:10,
+SW-HMI-007,Day and night theme follows the vehicle,Not verified,docs/requirements.md:32,src/main/kotlin/dev/namdev/sample/climate/ClimateScreen.kt:13,
+SW-HMI-008,Block text entry while driving,"Not implemented, not verified",docs/requirements.md:33,,
